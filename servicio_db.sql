@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2024 a las 05:16:56
+-- Tiempo de generación: 17-05-2024 a las 00:01:04
 -- Versión del servidor: 8.1.0
 -- Versión de PHP: 8.2.4
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `api_carrera` (
   `id` bigint NOT NULL,
   `nombre_carrera` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `api_carrera`
@@ -39,7 +39,9 @@ CREATE TABLE `api_carrera` (
 INSERT INTO `api_carrera` (`id`, `nombre_carrera`) VALUES
 (1, 'ISC'),
 (2, 'CP'),
-(3, 'IGE');
+(3, 'IGE'),
+(6, 'II'),
+(7, 'IC');
 
 -- --------------------------------------------------------
 
@@ -53,7 +55,18 @@ CREATE TABLE `api_formato` (
   `fecha_creacion` datetime(6) NOT NULL,
   `tipo_formato_id` bigint NOT NULL,
   `archivo` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `api_formato`
+--
+
+INSERT INTO `api_formato` (`id`, `nombre_formato`, `fecha_creacion`, `tipo_formato_id`, `archivo`) VALUES
+(7, 'Carta de Asignación', '2024-04-17 00:21:51.000000', 3, 'formatos/ITCHILPANCINGO-PV-002-07_CARTA_ASIGNACION.docx'),
+(8, 'Carta Compromiso', '2024-04-17 00:22:03.000000', 3, 'formatos/ITCHILPANCINGO-PV-002-06_CARTA_COMPROMISO.docx'),
+(9, 'Solicitud Servicio Social', '2024-04-17 00:22:18.000000', 3, 'formatos/ITCHILPANCINGO-PV-002-05_SOLICITUD_SERVICIO_SOCIAL.docx'),
+(10, 'Tarjeta de Control', '2024-04-17 00:22:36.000000', 3, 'formatos/ITCHILPANCINGO-PV-002-04_TARJETA_DE_CONTROL_1.docx'),
+(11, 'AEIOU', '2024-04-24 20:35:19.000000', 4, 'formatos/Carta_de_Asignación_1.docx');
 
 -- --------------------------------------------------------
 
@@ -71,14 +84,14 @@ CREATE TABLE `api_serviciosocial` (
   `atencion_a_nombre` varchar(255) DEFAULT NULL,
   `atencion_a_cargo` varchar(255) DEFAULT NULL,
   `usuario_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `api_serviciosocial`
 --
 
 INSERT INTO `api_serviciosocial` (`id`, `nombre_programa`, `area`, `dependencia_organizacion`, `titular_organizacion`, `cargo_titular`, `atencion_a_nombre`, `atencion_a_cargo`, `usuario_id`) VALUES
-(1, 'Apoyo Administrativo', 'area1', 'dependencia ejemplo', 'titular de ejemplo', 'cargo de ejemplo', '', 'ddf', 7);
+(1, 'Apoyo Administrativo', 'area2', 'dependencia ejemplo', 'titular de ejemplo', 'cargo de ejemplo', 'lorena rodriguez', 'ddf', 7);
 
 -- --------------------------------------------------------
 
@@ -89,7 +102,7 @@ INSERT INTO `api_serviciosocial` (`id`, `nombre_programa`, `area`, `dependencia_
 CREATE TABLE `api_tiposformatos` (
   `id` bigint NOT NULL,
   `nombre_formato` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `api_tiposformatos`
@@ -123,18 +136,15 @@ CREATE TABLE `api_usuario` (
   `last_login` datetime(6) DEFAULT NULL,
   `last_name` varchar(150) NOT NULL,
   `password` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `api_usuario`
 --
 
 INSERT INTO `api_usuario` (`id`, `tipo_usuario`, `username`, `servicio`, `residencia`, `ingles`, `carrera_id`, `date_joined`, `email`, `first_name`, `is_active`, `is_staff`, `is_superuser`, `last_login`, `last_name`, `password`) VALUES
-(3, NULL, 'miguelhc', 0, 0, 0, 2, '2024-03-29 17:09:07.048873', 'mahc1112@gmail.com', '', 1, 1, 1, '2024-03-29 19:56:36.309181', '', 'pbkdf2_sha256$720000$wqVr4kDP3u5nosfsfzQERr$ojY6fgpdajk+VOLfZTs4GnUfWH2pAFiHkMu4AcmHag8='),
-(4, NULL, 'usuario1', 0, 0, 0, NULL, '2024-03-29 19:44:01.484500', 'text@email.com', '', 1, 0, 0, NULL, '', 'texto123'),
-(5, NULL, 'usuario2', 0, 0, 0, NULL, '2024-03-29 19:50:10.000000', 'text@email.com', 'HOla', 1, 0, 0, NULL, '', 'pbkdf2_sha256$720000$02O0q5SDt1cMyJSZVpfJk3$Ajg15Y/aBvbxeoo1OWNtWuWSsYV/KB0Y0FkYC0bxozA='),
-(6, 'Personal', 'usuarioPersonal', 0, 0, 0, NULL, '2024-03-29 21:14:29.017982', '', '', 1, 0, 0, NULL, '', 'pbkdf2_sha256$720000$1CYDZrEbc7pCK26uaxMloA$UMZGAd4SUwctlxW9OHibWy5+VnF2Arg+M2jNQRy7W88='),
-(7, 'Estudiante', '20520594', 0, 0, 0, 1, '2024-03-29 21:14:44.000000', '', 'Miguel Angel', 1, 0, 0, NULL, 'Hernández Corona', 'pbkdf2_sha256$720000$ZdP4GoBYmQRbSnwPIw1LSn$I3DQQcHgQGUd3nYcVSx1bfanF+g0zThEj8gjtT5+UAA=');
+(7, 'Estudiante', '20520594', 1, 0, 0, 1, '2024-03-29 21:14:44.000000', '', 'Tilin', 1, 0, 0, NULL, 'Guzman Corona', 'pbkdf2_sha256$720000$tU47mbCagRlNHeRJoxmVYs$79Gg+L3gCvHD0t/qjA8SrQ/1zgSoDPtRnm5/vDXk2c0='),
+(8, 'Personal', 'miguelhc', 1, 0, 0, 1, '2024-04-23 20:36:16.000000', 'mahc1112@gmail.com', 'Miguel Angel', 1, 1, 1, '2024-05-16 21:58:39.613755', 'Hernández Corona', 'pbkdf2_sha256$720000$VNZJIG29wMKdojWtRYNuPa$ezJYrNaHWw9voduOmSHZUMHP5yEOalqjvTiIMjs6XjY=');
 
 -- --------------------------------------------------------
 
@@ -146,7 +156,7 @@ CREATE TABLE `api_usuario_groups` (
   `id` bigint NOT NULL,
   `usuario_id` bigint NOT NULL,
   `group_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -158,7 +168,7 @@ CREATE TABLE `api_usuario_user_permissions` (
   `id` bigint NOT NULL,
   `usuario_id` bigint NOT NULL,
   `permission_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -170,17 +180,14 @@ CREATE TABLE `authtoken_token` (
   `key` varchar(40) NOT NULL,
   `created` datetime(6) NOT NULL,
   `user_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `authtoken_token`
 --
 
 INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
-('3f7c25f7fb39afbaa1a35e7f00c13b8c24777cc7', '2024-03-29 19:50:11.793030', 5),
-('45b6897f1394f0ad8fdfe7d90b13191894291d77', '2024-03-29 21:14:45.014116', 7),
-('6a0afec3c2ff3ee23ffa9d31572ead3941017165', '2024-03-29 21:14:29.955970', 6),
-('bc8683fa4fb987bb7a99b8aac4108b263cd264ef', '2024-03-29 21:03:23.393038', 3);
+('45b6897f1394f0ad8fdfe7d90b13191894291d77', '2024-03-29 21:14:45.014116', 7);
 
 -- --------------------------------------------------------
 
@@ -191,7 +198,7 @@ INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
 CREATE TABLE `auth_group` (
   `id` int NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -203,7 +210,7 @@ CREATE TABLE `auth_group_permissions` (
   `id` bigint NOT NULL,
   `group_id` int NOT NULL,
   `permission_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -216,7 +223,7 @@ CREATE TABLE `auth_permission` (
   `name` varchar(255) NOT NULL,
   `content_type_id` int NOT NULL,
   `codename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_permission`
@@ -294,7 +301,7 @@ CREATE TABLE `auth_user` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_user`
@@ -313,7 +320,7 @@ CREATE TABLE `auth_user_groups` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
   `group_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -325,7 +332,7 @@ CREATE TABLE `auth_user_user_permissions` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
   `permission_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -349,8 +356,10 @@ CREATE TABLE `django_admin_log` (
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
-(1, '2024-03-31 00:17:08.887299', '5', 'usuario2 - HOla', 2, '[{\"changed\": {\"fields\": [\"First name\"]}}]', 10, 3),
-(2, '2024-03-31 00:17:40.559203', '7', 'usuarioEstudiante - Miguel Angel Hernández Corona', 2, '[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Carrera\"]}}]', 10, 3);
+(29, '2024-04-23 20:37:51.010981', '8', 'miguelhc - Miguel Angel Hernández Corona', 2, '[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Tipo usuario\", \"Carrera\"]}}]', 10, 8),
+(30, '2024-04-24 02:51:10.033796', '7', '20520594 - Fidel Gabriel Guzman Corona', 2, '[{\"changed\": {\"fields\": [\"Servicio\"]}}]', 10, 8),
+(31, '2024-04-24 02:51:14.341123', '8', 'miguelhc - Miguel Angel Hernández Corona', 2, '[{\"changed\": {\"fields\": [\"Servicio\"]}}]', 10, 8),
+(32, '2024-04-24 20:35:31.027963', '11', 'AEIOU', 1, '[{\"added\": {}}]', 8, 8);
 
 -- --------------------------------------------------------
 
@@ -362,7 +371,7 @@ CREATE TABLE `django_content_type` (
   `id` int NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_content_type`
@@ -394,7 +403,7 @@ CREATE TABLE `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_migrations`
@@ -442,15 +451,18 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('2em2qfh6rd16keq3ftbkp9yblu9sw5hs', '.eJxVjDsOwjAQBe_iGlm2119K-pzB8q4XEkC2lE-FuDtESgHtm5n3Erls65i3hec8VXEWUZx-Nyz04LaDei_t1iX1ts4Tyl2RB13k0Cs_L4f7dzCWZfzWXlMM7Ayk6AiSoQLk2LOJyqdqjdMB2OgrEoMFjaC9UYHQKqc9JhTvD8IoNt8:1rzjKS:ErpRC9aP1g29rUAnAkZybyuz4YB4tiVmEXjoFgh7nYg', '2024-05-08 20:34:56.452936'),
+('ic2235u4xjwupm4wyb30y8k8ggfun6ce', '.eJxVjDkOwkAQBP-yMVpZOzM-CMl5gzWXsQHtSj4ixN_BkgNIu6r6FXre1rHfFp_7ycI5QDj9bsL68LwDu3O-laglr_MkcVfiQZd4LebPy-H-HYy8jN8aG1CRzlFqMoSKbKBEhEauBqIVADImROeGasa2HUQxuaF2CakN7w_muzfS:1rz57k:AJ2ZGmJBrGAKdspYmGrC9Xj8gp7ru4egQjIutxs3E4g', '2024-05-07 01:39:08.657366'),
 ('s0hxr9gdwxsrm0288g6rap1zt7814ucx', '.eJxVjDkOwkAQBP-yMVpZOzM-CMl5gzWXsQHtSj4ixN_BkgNIu6r6FXre1rHfFp_7ycI5QDj9bsL68LwDu3O-laglr_MkcVfiQZd4LebPy-H-HYy8jN8aG1CRzlFqMoSKbKBEhEauBqIVADImROeGasa2HUQxuaF2CakN7w_muzfS:1rqFjJ:xfv3ddwa6Ux5FEhOFw2K_yb76TDicvHRSwDSzZtV-_I', '2024-04-12 17:09:25.050841'),
-('vxow3tnlsetk2naxziy471qd260hmy1b', '.eJxVjDkOwkAQBP-yMVpZOzM-CMl5gzWXsQHtSj4ixN_BkgNIu6r6FXre1rHfFp_7ycI5QDj9bsL68LwDu3O-laglr_MkcVfiQZd4LebPy-H-HYy8jN8aG1CRzlFqMoSKbKBEhEauBqIVADImROeGasa2HUQxuaF2CakN7w_muzfS:1rqIL6:uaFKuEjxIBSuJDvyYcwlGSOqbNDochz-K3U8D8AaWww', '2024-04-12 19:56:36.312182');
+('vxow3tnlsetk2naxziy471qd260hmy1b', '.eJxVjDkOwkAQBP-yMVpZOzM-CMl5gzWXsQHtSj4ixN_BkgNIu6r6FXre1rHfFp_7ycI5QDj9bsL68LwDu3O-laglr_MkcVfiQZd4LebPy-H-HYy8jN8aG1CRzlFqMoSKbKBEhEauBqIVADImROeGasa2HUQxuaF2CakN7w_muzfS:1rqIL6:uaFKuEjxIBSuJDvyYcwlGSOqbNDochz-K3U8D8AaWww', '2024-04-12 19:56:36.312182'),
+('vz14t6tjighdrmt36dxx9j1ibgm4kgc7', '.eJxVjDsOwjAQBe_iGlm2119K-pzB8q4XEkC2lE-FuDtESgHtm5n3Erls65i3hec8VXEWUZx-Nyz04LaDei_t1iX1ts4Tyl2RB13k0Cs_L4f7dzCWZfzWXlMM7Ayk6AiSoQLk2LOJyqdqjdMB2OgrEoMFjaC9UYHQKqc9JhTvD8IoNt8:1s7j7X:d62XqNP5DuP4KmVe5hZ-L5w4n5_PnDfePZvAXg7snj0', '2024-05-30 21:58:39.613755');
 
 --
 -- Índices para tablas volcadas
@@ -594,13 +606,13 @@ ALTER TABLE `django_session`
 -- AUTO_INCREMENT de la tabla `api_carrera`
 --
 ALTER TABLE `api_carrera`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `api_formato`
 --
 ALTER TABLE `api_formato`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `api_serviciosocial`
@@ -612,13 +624,13 @@ ALTER TABLE `api_serviciosocial`
 -- AUTO_INCREMENT de la tabla `api_tiposformatos`
 --
 ALTER TABLE `api_tiposformatos`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `api_usuario`
 --
 ALTER TABLE `api_usuario`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `api_usuario_groups`

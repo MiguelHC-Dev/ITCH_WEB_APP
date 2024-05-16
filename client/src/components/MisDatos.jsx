@@ -492,9 +492,6 @@ function MisDatos() {
                 )}
                 <DialogBody>
                     <div className="relative flex w-full">
-
-
-
                         <Input
                             type={showCurrentPassword ? "text" : "password"}
                             label="Contraseña Actual"
@@ -507,9 +504,6 @@ function MisDatos() {
                             error={!!passwordErrors.currentPassword} // Marca el input como erróneo si hay un mensaje de error
                             required
                         />
-
-
-
                         <Button size="sm" onClick={toggleShowCurrentPassword} className="!absolute right-1 top-1 rounded">
                             {showCurrentPassword ? 'Ocultar' : 'Mostrar'}
                         </Button>
@@ -518,11 +512,7 @@ function MisDatos() {
                     {passwordErrors.currentPassword && (
                         <p className="text-red-500 text-sm mt-1">{passwordErrors.currentPassword}</p> // Muestra el mensaje de error
                     )}
-
-
                     <br />
-
-
                     <div className='relative flex w-full '>
                         <Input
                             type={showNewPassword ? "text" : "password"}
