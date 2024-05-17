@@ -34,6 +34,13 @@ function Login() {
         window.location.href = '/homePersonal';
     }
 
+
+    const irLoginPersonal2 = () => {
+        // Redirige al panel de administrador del backend de Django
+        window.location.href = "http://127.0.0.1:8000/admin/login/?next=/admin/";
+    };
+    
+
     const loginUser = async () => {
         try {
             const tipo_usuario = vistaActual;
@@ -110,7 +117,7 @@ function Login() {
                             </button>
                             <button
                                 type="button"
-                                onClick={irLoginPersonal}
+                                onClick={irLoginPersonal2}
                                 className={`${vistaActual === 'Personal' ? styles.active : ''}  ${styles.button}`}
                                 id="btnPersonal"
                             >
@@ -134,7 +141,7 @@ function Login() {
                         )}
 
 
-                        <a href="#" className={`${styles.olvidoContraseña} ${styles.a}`}>Olvidaste tu contraseña?</a>
+                        {/* <a href="#" className={`${styles.olvidoContraseña} ${styles.a}`}>Olvidaste tu contraseña?</a> */}
 
                         {vistaActual === 'Estudiante' && (
                             <button type="button" onClick={loginUser} className={`${styles.botonIniciarSesion} ${styles.button}`}>INICIAR SESIÓN</button>

@@ -93,8 +93,8 @@ DATABASES = {
         'NAME': 'servicio_db', # Nombre de la base de datos que creaste
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',   # O la dirección IP del servidor de tu base de datos
-        'PORT': '3306',        # El puerto predeterminado de MySQL es 3306
+        'HOST': '127.0.0.1',   # O la dirección IP del servidor de tu base de datos
+        'PORT': '3308',        # El puerto predeterminado de MySQL es 3306
     }
 }
 

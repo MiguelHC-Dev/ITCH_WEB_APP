@@ -3,7 +3,20 @@
 {% block title %}Mi Administración Personalizada{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">Mi Sitio de Administración</a></h1>
+<div style="display: flex; 
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;
+">
+    <h1 id="site-name" style="margin-bottom: 10px;
+                              font-size: 1.3em;
+                              font-weight: bold;
+                              color: #333;   
+    "><a href="{% url 'admin:index' %}">Mi Sitio de Administración</a></h1>
+
+    <a id="view-site" style="text-decoration: underline;" href="http://localhost:5173/login">Entrar como Estudiante</a>
+
+</div>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
